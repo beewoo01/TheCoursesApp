@@ -17,7 +17,7 @@ fun WelcomeText(modifier: Modifier) {
         text = "Welcome Back!",
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
-        color = Color.White,
+        color = Color.Black,
         modifier = modifier
     )
 }
@@ -46,6 +46,7 @@ fun JoinNowButton(modifier: Modifier, onClick: () -> Unit) {
 @Composable
 fun CoursesImage(modifier: Modifier) {
     Image(
+        modifier = modifier,
         painter = painterResource(R.drawable.courses),
         contentDescription = "Courses"
     )

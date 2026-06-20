@@ -28,9 +28,17 @@ fun ConstraintLayoutScreen() {
 
         // 1- Creating the References for Composables
         // that will be constrainted within the layout
-        val (gradientBackground, profileImg, notificationImg) = createRefs()
+        val (
+            gradientBackground,
+            profileImg,
+            notificationImg,
+            welcomeText,
+            questionText,
+            joinBtn,
+            coursesImg,
+        ) = createRefs()
 
-        val horizontalGuideline1 = createGuidelineFromTop(0.45f)
+        val horizontalGuideline1 = createGuidelineFromBottom(0.45f)
 
         BackgroundGradient(
             modifier = Modifier.constrainAs(gradientBackground) {
@@ -44,9 +52,10 @@ fun ConstraintLayoutScreen() {
             }
         )
 
-        val topGuidLine = createGuidelineFromTop(16.dp)
-        val startGuidLine = createGuidelineFromTop(16.dp)
-        val endGuidLine = createGuidelineFromTop(16.dp)
+        // 2- Header: (chain example)
+        val topGuidLine = createGuidelineFromTop(24.dp)
+        val startGuidLine = createGuidelineFromStart(16.dp)
+        val endGuidLine = createGuidelineFromEnd(16.dp)
 
         createHorizontalChain(
             profileImg, notificationImg, chainStyle = ChainStyle.SpreadInside
@@ -62,6 +71,39 @@ fun ConstraintLayoutScreen() {
                 bottom.linkTo(profileImg.bottom)
             }
         )
+
+
+        /// 3- The Middle Part
+        WelcomeText(modifier = Modifier.constrainAs(welcomeText) {
+            top.linkTo(profileImg.bottom, margin = 32.dp)
+            start.linkTo(startGuidLine)
+        })
+
+        QuestionText(modifier = Modifier.constrainAs(questionText) {
+            top.linkTo(welcomeText.bottom, margin = 0.dp)
+            start.linkTo(welcomeText.start)
+        })
+
+        JoinNowButton(
+            modifier = Modifier.constrainAs(joinBtn) {
+                top.linkTo(questionText.bottom, margin = 32.dp)
+                start.linkTo(questionText.start)
+                end.linkTo(questionText.end)
+            }) {
+
+        }
+
+        CoursesImage(
+            modifier = Modifier.constrainAs(coursesImg) {
+                bottom.linkTo(horizontalGuideline1)
+                end.linkTo(endGuidLine)
+
+                start.linkTo(joinBtn.end, margin = 8.dp)
+                top.linkTo(joinBtn.bottom, margin = 16.dp)
+
+                width = Dimension.fillToConstraints
+                height = Dimension.fillToConstraints
+            })
 
     }
 }
