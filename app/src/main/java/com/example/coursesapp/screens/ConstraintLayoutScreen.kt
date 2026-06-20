@@ -49,7 +49,7 @@ fun ConstraintLayoutScreen() {
             pythonText,
         ) = createRefs()
 
-        val (latestLessonsText, seeAllTxt) = createRefs()
+        val (latestLessonsText, seeAllTxt, lessonCard) = createRefs()
 
         val horizontalGuideline1 = createGuidelineFromBottom(0.45f)
 
@@ -191,6 +191,14 @@ fun ConstraintLayoutScreen() {
             top.linkTo(latestLessonsText.top)
             end.linkTo(endGuidLine)
 
+        })
+
+        LessonCard(modifier = Modifier.constrainAs(lessonCard) {
+            top.linkTo(latestLessonsText.bottom, margin = 16.dp)
+            start.linkTo(latestLessonsText.start)
+            end.linkTo(endGuidLine)
+            width = Dimension.fillToConstraints
+            height = Dimension.wrapContent
         })
 
     }
