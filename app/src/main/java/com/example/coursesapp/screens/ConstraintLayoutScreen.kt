@@ -46,8 +46,10 @@ fun ConstraintLayoutScreen() {
             pythonImg,
             androidText,
             javaText,
-            pythonText
+            pythonText,
         ) = createRefs()
+
+        val (latestLessonsText, seeAllTxt) = createRefs()
 
         val horizontalGuideline1 = createGuidelineFromBottom(0.45f)
 
@@ -162,9 +164,9 @@ fun ConstraintLayoutScreen() {
         )
 
         AndroidText(modifier = Modifier.constrainAs(androidText) {
-          top.linkTo(androidImg.bottom, margin = 12.dp)
-          start.linkTo(androidImg.start)
-          end.linkTo(androidImg.end)
+            top.linkTo(androidImg.bottom, margin = 12.dp)
+            start.linkTo(androidImg.start)
+            end.linkTo(androidImg.end)
         })
 
         JavaText(modifier = Modifier.constrainAs(javaText) {
@@ -173,10 +175,22 @@ fun ConstraintLayoutScreen() {
             end.linkTo(javaImg.end)
         })
 
-        JavaText(modifier = Modifier.constrainAs(pythonText) {
+        PythonText(modifier = Modifier.constrainAs(pythonText) {
             top.linkTo(pythonImg.bottom, margin = 12.dp)
             start.linkTo(pythonImg.start)
             end.linkTo(pythonImg.end)
+        })
+
+        LatestLessonText(modifier = Modifier.constrainAs(latestLessonsText) {
+            top.linkTo(androidText.bottom, margin = 30.dp)
+            start.linkTo(startGuidLine)
+
+        })
+
+        SeeAllText(modifier = Modifier.constrainAs(seeAllTxt) {
+            top.linkTo(latestLessonsText.top)
+            end.linkTo(endGuidLine)
+
         })
 
     }
