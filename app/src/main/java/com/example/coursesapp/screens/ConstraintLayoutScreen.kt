@@ -36,6 +36,7 @@ fun ConstraintLayoutScreen() {
             questionText,
             joinBtn,
             coursesImg,
+            card
         ) = createRefs()
 
         val horizontalGuideline1 = createGuidelineFromBottom(0.45f)
@@ -75,7 +76,7 @@ fun ConstraintLayoutScreen() {
 
         /// 3- The Middle Part
         WelcomeText(modifier = Modifier.constrainAs(welcomeText) {
-            top.linkTo(profileImg.bottom, margin = 32.dp)
+            top.linkTo(profileImg.bottom, margin = 24.dp)
             start.linkTo(startGuidLine)
         })
 
@@ -95,15 +96,27 @@ fun ConstraintLayoutScreen() {
 
         CoursesImage(
             modifier = Modifier.constrainAs(coursesImg) {
-                bottom.linkTo(horizontalGuideline1)
+                bottom.linkTo(horizontalGuideline1, margin = 0.dp)
                 end.linkTo(endGuidLine)
+                top.linkTo(joinBtn.bottom, margin = 0.dp)
 
-                start.linkTo(joinBtn.end, margin = 8.dp)
-                top.linkTo(joinBtn.bottom, margin = 16.dp)
+                width = Dimension.value(240.dp)
+                height = Dimension.fillToConstraints
+            }
+        )
 
+        MyCard(
+            modifier = Modifier.constrainAs(card) {
+                top.linkTo(horizontalGuideline1, margin = (-32).dp)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+                bottom.linkTo(parent.bottom)
                 width = Dimension.fillToConstraints
                 height = Dimension.fillToConstraints
-            })
+
+            }
+        )
+
 
     }
 }
