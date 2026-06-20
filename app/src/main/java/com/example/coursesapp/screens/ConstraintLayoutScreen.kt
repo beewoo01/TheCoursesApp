@@ -6,12 +6,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -36,7 +39,14 @@ fun ConstraintLayoutScreen() {
             questionText,
             joinBtn,
             coursesImg,
-            card
+            card,
+            newCourses,
+            androidImg,
+            javaImg,
+            pythonImg,
+            androidText,
+            javaText,
+            pythonText
         ) = createRefs()
 
         val horizontalGuideline1 = createGuidelineFromBottom(0.45f)
@@ -96,7 +106,7 @@ fun ConstraintLayoutScreen() {
 
         CoursesImage(
             modifier = Modifier.constrainAs(coursesImg) {
-                bottom.linkTo(horizontalGuideline1, margin = 0.dp)
+                bottom.linkTo(horizontalGuideline1, margin = 32.dp)
                 end.linkTo(endGuidLine)
                 top.linkTo(joinBtn.bottom, margin = 0.dp)
 
@@ -118,6 +128,57 @@ fun ConstraintLayoutScreen() {
         )
 
 
+        // Our Courses Section
+        TextOurCoursed(
+            modifier = Modifier.constrainAs(newCourses) {
+                top.linkTo(card.top, margin = 24.dp)
+                start.linkTo(card.start, margin = 16.dp)
+            }
+        )
+
+        AndroidCourseImg(
+            modifier = Modifier.constrainAs(androidImg) {
+                top.linkTo(newCourses.bottom, margin = 16.dp)
+            }
+        )
+
+        JavaCourseImg(
+            modifier = Modifier.constrainAs(javaImg) {
+                top.linkTo(androidImg.top)
+                bottom.linkTo(androidImg.bottom)
+            }
+        )
+
+        PythonCourseImg(
+            modifier = Modifier.constrainAs(pythonImg) {
+                top.linkTo(androidImg.top)
+                bottom.linkTo(androidImg.bottom)
+            }
+        )
+
+        createHorizontalChain(
+            androidImg, javaImg, pythonImg,
+            chainStyle = ChainStyle.Spread
+        )
+
+        AndroidText(modifier = Modifier.constrainAs(androidText) {
+          top.linkTo(androidImg.bottom, margin = 12.dp)
+          start.linkTo(androidImg.start)
+          end.linkTo(androidImg.end)
+        })
+
+        JavaText(modifier = Modifier.constrainAs(javaText) {
+            top.linkTo(javaImg.bottom, margin = 12.dp)
+            start.linkTo(javaImg.start)
+            end.linkTo(javaImg.end)
+        })
+
+        JavaText(modifier = Modifier.constrainAs(pythonText) {
+            top.linkTo(pythonImg.bottom, margin = 12.dp)
+            start.linkTo(pythonImg.start)
+            end.linkTo(pythonImg.end)
+        })
+
     }
 }
 
@@ -128,5 +189,32 @@ fun BackgroundGradient(modifier: Modifier) {
         contentDescription = "Main Background",
         contentScale = ContentScale.FillBounds,
         modifier = modifier.alpha(0.8f)
+    )
+}
+
+@Composable
+fun AndroidText(modifier: Modifier) {
+    Text(
+        text = "Android",
+        modifier = modifier,
+        fontSize = 22.sp
+    )
+}
+
+@Composable
+fun JavaText(modifier: Modifier) {
+    Text(
+        text = "Java",
+        modifier = modifier,
+        fontSize = 22.sp
+    )
+}
+
+@Composable
+fun PythonText(modifier: Modifier) {
+    Text(
+        text = "Python",
+        modifier = modifier,
+        fontSize = 22.sp
     )
 }
